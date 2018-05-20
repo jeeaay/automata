@@ -6,7 +6,7 @@
  * @Author: Jeay 
  * @Date: 2018-05-20 10:24:52 
  * @Last Modified by: Jeay
- * @Last Modified time: 2018-05-20 15:38:50
+ * @Last Modified time: 2018-05-20 15:57:36
  * /
 '''
 
@@ -40,13 +40,13 @@ class cert():
       self.__privkey = key["private_key"]
       # 保存密钥
       if os.path.exists(self.__sshpath) == False:
-        os.makedirs(self.__sshpath)
+        os.makedirs(self.__sshpath, 0o0755)
       with open(self.pubkey_path, 'w+') as f:
         f.write(self.__pubkey)
-        os.chmod(self.pubkey_path, 0o0644)
+        os.chmod(self.pubkey_path, 0o0600)
       with open(self.privkey_path,'w+') as f:
         f.write(self.__privkey)
-        os.chmod(self.privkey_path, 0o0644)
+        os.chmod(self.privkey_path, 0o0600)
       f.close()
       
       
@@ -95,10 +95,5 @@ class cert():
     key_content['private_key'] = private_key
     return key_content
 
-# pubk = cert().get_loginkey()
-# privkey = cert().get_privkey()
 
-# print(pubk)
-#pubkey = paramiko.RSAKey.generate(2048)
-#key = paramiko.RSAKey.generate(2048)
-#print(key.write_private_key())
+# privkey = cert().get_privkey()
