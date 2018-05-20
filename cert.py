@@ -6,7 +6,7 @@
  * @Author: Jeay 
  * @Date: 2018-05-20 10:24:52 
  * @Last Modified by: Jeay
- * @Last Modified time: 2018-05-20 15:34:03
+ * @Last Modified time: 2018-05-20 15:38:50
  * /
 '''
 
@@ -84,11 +84,11 @@ class cert():
         key = paramiko.RSAKey.from_private_key(output)
       except Exception as e:
         print(e)
-  
+    comment = " %s@%s" % ("automata", os.uname()[1])
     for data in [key.get_name(),
                  " ",
                  key.get_base64(),
-                 " %s@%s" % ("magicstack", os.uname()[1])]:
+                 comment]:
       sbuffer.write(data)
     public_key = sbuffer.getvalue()
     key_content['public_key'] = public_key
